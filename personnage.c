@@ -53,57 +53,63 @@ void affichage_pause(SDL_Surface *screen,image *pause){
 	SDL_BlitSurface(pause->image,NULL,screen,&pause->position_image);
 	}
 
-void deplacer_personnage_droite (SDL_Surface *screen,personnage *perso,background *level){
-perso->position_personnage.x+=7; 
+void initialiser_fire(image *fire) {
+	fire->position_image.x=400;
+	fire->position_image.y=280;
+	fire->image = IMG_Load("fire.png");
+	}
+
+void affichage_fire(SDL_Surface *screen,image *fire){
+	SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
+	}
+
+void deplacer_personnage_droite (SDL_Surface *screen,personnage *perso,background *level,image *fire, int i){
+
+perso->position_personnage.x+=1; 
 SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
-SDL_BlitSurface(perso->droite[0],NULL,screen,&perso->position_personnage);
+SDL_BlitSurface(perso->droite[i],NULL,screen,&perso->position_personnage);
+SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
+
 SDL_Flip(screen);
-SDL_Delay(60);
-perso->position_personnage.x+=7; 
-SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
-SDL_BlitSurface(perso->droite[1],NULL,screen,&perso->position_personnage);
-SDL_Flip(screen);
-SDL_Delay(60);
-perso->position_personnage.x+=7; 
-SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
-SDL_BlitSurface(perso->droite[2],NULL,screen,&perso->position_personnage);
-SDL_Flip(screen);
-SDL_Delay(60);
-perso->position_personnage.x+=7; 
-SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
-SDL_BlitSurface(perso->droite[3],NULL,screen,&perso->position_personnage);
-SDL_Flip(screen);
-SDL_Delay(60);
+SDL_Delay(300);
+
+i++;
+if (i>=4) {i=0; }
 }
 
-void deplacer_personnage_gauche (SDL_Surface *screen,personnage *perso,background *level){
+void deplacer_personnage_gauche (SDL_Surface *screen,personnage *perso,background *level,image *fire){
 perso->position_personnage.x-=7; 
 SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
 SDL_BlitSurface(perso->gauche[0],NULL,screen,&perso->position_personnage);
+SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
 SDL_Flip(screen);
 SDL_Delay(60);
 perso->position_personnage.x-=7; 
 SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
 SDL_BlitSurface(perso->gauche[1],NULL,screen,&perso->position_personnage);
+SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
 SDL_Flip(screen);
 SDL_Delay(60);
 perso->position_personnage.x-=7; 
 SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
 SDL_BlitSurface(perso->gauche[2],NULL,screen,&perso->position_personnage);
+SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
 SDL_Flip(screen);
 SDL_Delay(60);
 perso->position_personnage.x-=7; 
 SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
 SDL_BlitSurface(perso->gauche[3],NULL,screen,&perso->position_personnage);
+SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
 SDL_Flip(screen);
 SDL_Delay(60);
 }
 
-void deplacer_personnage_haut (SDL_Surface *screen,personnage *perso,background *level){
+void deplacer_personnage_haut (SDL_Surface *screen,personnage *perso,background *level,image *fire){
 perso->position_personnage.y-=60;
 perso->position_personnage.x+=70;
 SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
 SDL_BlitSurface(perso->jump,NULL,screen,&perso->position_personnage);
+SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
 SDL_Flip(screen);
 SDL_Delay(300);
 perso->position_personnage.y+=60;
