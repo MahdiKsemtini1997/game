@@ -87,14 +87,28 @@ void deplacer_personnage_gauche (SDL_Surface *screen,personnage *perso,backgroun
 }
 
 void deplacer_personnage_haut (SDL_Surface *screen,personnage *perso,background *level,image *fire){
-	perso->position_personnage.y-=60;
-	perso->position_personnage.x+=70;
+	int i=0 ;
+	while (i<=10) {
+	i+=1;
+	perso->position_personnage.y-=i;
+	perso->position_personnage.x+=i;
 	SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
 	SDL_BlitSurface(perso->jump,NULL,screen,&perso->position_personnage);
 	SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
 	SDL_Flip(screen);
-	SDL_Delay(300);
-	perso->position_personnage.y+=60;
-	perso->position_personnage.x+=70;
+	SDL_Delay(20);
+	}
+	i=0;
+	while (i<=10) {
+	i+=1;
+	perso->position_personnage.y+=i;
+	perso->position_personnage.x+=i;
+	SDL_BlitSurface(level->image_background,NULL,screen,&level->positionbackground);
+	SDL_BlitSurface(perso->jump,NULL,screen,&perso->position_personnage);
+	SDL_BlitSurface(fire->image,NULL,screen,&fire->position_image);
+	SDL_Flip(screen);
+	SDL_Delay(20);
+	}
+	
 }
 
