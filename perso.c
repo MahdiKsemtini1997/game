@@ -3,8 +3,8 @@
 #include <SDL/SDL_mixer.h>
 #include "personnage.h"
 
-int main()
-{
+int main(){
+
 SDL_Surface *screen = NULL;
 int done=1;
 personnage perso;
@@ -30,8 +30,7 @@ affichage_personnage(screen,&perso);
 affichage_fire(screen,&fire);
 SDL_Flip(screen);
 	
-while (done) 
-	{ 
+while (done) { 
 	
 
 	SDL_PollEvent(&event);
@@ -39,34 +38,36 @@ while (done)
 			case SDL_QUIT: done=0;
 				break;
 			case SDL_KEYDOWN: {
-				if(event.key.keysym.sym == SDLK_ESCAPE){
-				affichage_background_level(screen,&level);
-				affichage_personnage(screen,&perso);
-				affichage_pause(screen,&pause);
-				SDL_Flip(screen);
-				SDL_Delay(5000);} 
-				if(event.key.keysym.sym == SDLK_RIGHT){
-				deplacer_personnage_droite (screen, &perso,&level,&fire,i);
-int m=perso.position_personnage.x+=60;
-	int n=fire.position_image.x;
-	if(m>=n) {affichage_background_gameover(screen,&gameover);
-SDL_Flip(screen);
-SDL_Delay(2000);
-done=0;}
+				int m=perso.position_personnage.x+60;
+				int n=fire.position_image.x;
+				if(m>=n) {
+					affichage_background_gameover(screen,&gameover);
+					SDL_Flip(screen);
+					SDL_Delay(2000);
+					done=0;
 				}
-				if(event.key.keysym.sym == SDLK_LEFT){
-				deplacer_personnage_gauche (screen,&perso,&level,&fire);
+				else if(event.key.keysym.sym == SDLK_ESCAPE){
+					affichage_background_level(screen,&level);
+					affichage_personnage(screen,&perso);
+					affichage_pause(screen,&pause);
+					SDL_Flip(screen);
+					SDL_Delay(5000);} 
+				else if(event.key.keysym.sym == SDLK_RIGHT){
+					deplacer_personnage_droite (screen, &perso,&level,&fire,&i);
 				}
-				if(event.key.keysym.sym == SDLK_SPACE){
-				deplacer_personnage_haut (screen, &perso,&level,&fire);
+				else if(event.key.keysym.sym == SDLK_LEFT){
+					deplacer_personnage_gauche (screen,&perso,&level,&fire,&i);
+				}
+				else if(event.key.keysym.sym == SDLK_SPACE){
+					deplacer_personnage_haut (screen, &perso,&level,&fire);
 				}
 				break;
 			}
 			case SDL_MOUSEBUTTONDOWN : {
 				if (event.button.button ==  SDL_BUTTON_RIGHT)
-				deplacer_personnage_droite (screen,&perso,&level,&fire,i);
+					deplacer_personnage_droite (screen,&perso,&level,&fire,&i);
 				if (event.button.button ==  SDL_BUTTON_LEFT)
-				deplacer_personnage_gauche (screen,&perso,&level,&fire);
+					deplacer_personnage_gauche (screen,&perso,&level,&fire,&i);
 			}
 			default: {
 				affichage_background_level(screen,&level);
@@ -74,8 +75,8 @@ done=0;}
 				affichage_fire(screen,&fire);
 				SDL_Flip(screen);
 			}
-			}
-	}
+    }
+}
 SDL_FreeSurface(perso.personnage);
 SDL_FreeSurface(level.image_background);
 return 0;

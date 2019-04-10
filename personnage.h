@@ -32,8 +32,8 @@ void affichage_pause(SDL_Surface *screen,image *pause);
 void initialiser_fire(image *fire);
 void affichage_fire(SDL_Surface *screen,image *fire);
 
-void deplacer_personnage_droite (SDL_Surface *screen,personnage *perso, background *level,image *fire,int i);
-void deplacer_personnage_gauche (SDL_Surface *screen,personnage *perso, background *level,image *fire);
-void deplacer_personnage_haut (SDL_Surface *screen,personnage *perso, background *level,image *fire);
+void deplacer_personnage_droite (SDL_Surface *screen,personnage *perso, background *level, image *fire, int *i);
+void deplacer_personnage_gauche (SDL_Surface *screen,personnage *perso, background *level, image *fire, int *i);
+void deplacer_personnage_haut (SDL_Surface *screen,personnage *perso, background *level, image *fire);
 
 #endif
